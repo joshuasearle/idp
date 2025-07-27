@@ -1,3 +1,5 @@
 ---
 controller:
   revisionHistoryLimit: 5
+  flags:
+    on-by-default: true

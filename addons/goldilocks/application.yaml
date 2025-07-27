@@ -12,15 +12,17 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-  source:
-    chart: goldilocks
-    repoURL: https://charts.fairwinds.com/stable
-    targetRevision: 9.0.2
-    helm:
-      values: |
-        controller:
-          flags:
-            on-by-default: true
+  sources:
+    - chart: goldilocks
+      repoURL: https://charts.fairwinds.com/stable
+      targetRevision: 9.0.2
+      helm:
+        valueFiles:
+          - $values/addons/goldilocks/values-base.yaml
+          - $values/addons/goldilocks/values-dev.yaml
+    - repoURL: https://github.com/joshuasearle/idp
+      targetRevision: main
+      ref: values
   destination:
     server: "https://kubernetes.default.svc"
     namespace: goldilocks
