@@ -1,0 +1,4 @@
+---
+global:
+  additionalLabels:
+    my-special-label: my-value-3
