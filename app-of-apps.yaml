@@ -1,2 +1,22 @@
 ---
-# TODO: Combine all addons into one mega-addon
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+  namespace: argocd
+spec:
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  source:
+    repoURL: https://github.com/joshuasearle/idp
+    targetRevision: main
+    path: addons
+    directory:
+      recurse: true
+      include: application.yaml
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: argocd
